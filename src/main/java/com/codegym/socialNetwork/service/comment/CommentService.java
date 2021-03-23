@@ -3,9 +3,10 @@ package com.codegym.socialNetwork.service.comment;
 import com.codegym.socialNetwork.model.Comment;
 import com.codegym.socialNetwork.repository.CommentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class CommentService implements ICommentService {
 
     @Autowired

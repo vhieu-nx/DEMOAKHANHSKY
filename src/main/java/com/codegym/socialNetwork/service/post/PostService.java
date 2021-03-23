@@ -3,9 +3,10 @@ package com.codegym.socialNetwork.service.post;
 import com.codegym.socialNetwork.model.Post;
 import com.codegym.socialNetwork.repository.PostRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class PostService implements IPostService{
 
     @Autowired

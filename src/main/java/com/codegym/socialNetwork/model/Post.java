@@ -19,9 +19,6 @@ public class Post {
     private int status;
 
     @Column(nullable = false)
-    private String notification;
-
-    @Column(nullable = false)
     private String Image;
 
     @ManyToOne
