@@ -15,7 +15,7 @@ public class Friend {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date createAt;
-    private int status;
+    private Integer status;
     private Long UserId;
     private Long UserId2;
 
