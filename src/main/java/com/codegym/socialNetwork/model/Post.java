@@ -12,6 +12,8 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String imagePost;
+
     @Column(nullable = false)
     private Date createAt;
 

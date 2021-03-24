@@ -33,5 +33,5 @@ public class User {
     private String gender;
 
     @Column(columnDefinition = "TEXT")
-    private String ImageUrls;
+    private String ImageUser;
 }

@@ -23,5 +23,4 @@ public class UserController {
         modelAndView.addObject("user", new User());
         return modelAndView;
     }
-
 }
