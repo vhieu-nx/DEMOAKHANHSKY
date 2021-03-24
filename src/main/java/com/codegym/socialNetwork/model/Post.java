@@ -20,9 +20,6 @@ public class Post {
     @Column(nullable = false)
     private int status;
 
-    @Column(nullable = false)
-    private String Image;
-
     @ManyToOne
     private AppUser appUser;
 }
