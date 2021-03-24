@@ -21,23 +21,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private IUserService userService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private CustomSuccessHandler customSuccessHandler;
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService((UserDetailsService)userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        http.authorizeRequests().antMatchers("/**").permitAll()
+        http.authorizeRequests().antMatchers("/trangchu").permitAll()
                 .and()
-                .formLogin()
+                .authorizeRequests().antMatchers("/**").hasRole("USER")
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+                .formLogin().successHandler(customSuccessHandler)
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .and().exceptionHandling().accessDeniedPage("/khongcoquyen");
+        http.csrf().disable();;
     }
 
 

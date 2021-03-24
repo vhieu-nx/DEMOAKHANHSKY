@@ -18,5 +18,4 @@ public class Friend {
     private Integer status;
     private Long UserId;
     private Long UserId2;
-
 }

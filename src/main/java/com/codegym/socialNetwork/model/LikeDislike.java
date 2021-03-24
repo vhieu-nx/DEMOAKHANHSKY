@@ -17,6 +17,9 @@ public class LikeDislike {
     @ManyToOne
     private Comment comment;
 
+    @OneToOne
+    private AppUser appUser;
+
     private boolean isLiked;
 
     public boolean isLiked(){

@@ -15,5 +15,5 @@ public class Notification {
     private LikeDislike likeDislike;
 
     @OneToOne
-    private User user;
+    private AppUser appUser;
 }

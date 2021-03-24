@@ -1,6 +1,6 @@
 package com.codegym.socialNetwork.controller;
 
-import com.codegym.socialNetwork.model.User;
+import com.codegym.socialNetwork.model.AppUser;
 import com.codegym.socialNetwork.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,13 +14,13 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
     public ModelAndView register(){
         ModelAndView modelAndView = new ModelAndView("register");
-        modelAndView.addObject("user", new User());
+        modelAndView.addObject("user", new AppUser());
         return modelAndView;
     }
 }

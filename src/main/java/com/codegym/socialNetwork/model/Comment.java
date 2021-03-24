@@ -17,7 +17,7 @@ public class Comment {
     private Date createAt;
 
     @ManyToOne
-    private User user;
+    private AppUser appUser;
 
     @ManyToOne
     private Post post;

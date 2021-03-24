@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @Data
-public class User {
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -34,4 +34,7 @@ public class User {
 
     @Column(columnDefinition = "TEXT")
     private String ImageUser;
+
+    @ManyToOne
+    private AppRole appRole;
 }

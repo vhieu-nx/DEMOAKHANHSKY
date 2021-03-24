@@ -24,5 +24,5 @@ public class Post {
     private String Image;
 
     @ManyToOne
-    private User user;
+    private AppUser appUser;
 }
