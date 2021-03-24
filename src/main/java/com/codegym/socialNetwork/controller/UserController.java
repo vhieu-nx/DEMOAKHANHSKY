@@ -17,10 +17,4 @@ public class UserController {
 //    @Autowired
 //    private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/register")
-    public ModelAndView register(){
-        ModelAndView modelAndView = new ModelAndView("register");
-        modelAndView.addObject("user", new AppUser());
-        return modelAndView;
-    }
 }
