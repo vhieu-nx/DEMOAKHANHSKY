@@ -7,13 +7,14 @@ import java.util.Date;
 
 @Entity
 @Data
-public class Friend {
+public class FriendRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Date createAt;
     @OneToOne
     private StatusRequest statusRequest;
+
     @ManyToOne
     private AppUser from;
     @ManyToOne
