@@ -9,12 +9,12 @@ import java.util.Date;
 @Data
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String content;
 
-    private Date createAt;
+    private Date dateComment;
 
     @ManyToOne
     private AppUser appUser;

@@ -2,20 +2,20 @@ package com.codegym.socialNetwork.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Data
 public class Friend {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Date createAt;
+    private Date dateRequest;
     private Integer status;
-    private Long UserId;
-    private Long UserId2;
+    @ManyToOne
+    private AppUser UserTo;
+
+    @ManyToOne
+    private AppUser UserFrom;
 }

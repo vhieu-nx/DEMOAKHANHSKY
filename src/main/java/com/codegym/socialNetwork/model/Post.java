@@ -9,13 +9,13 @@ import java.util.Date;
 @Data
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imagePost;
 
     @Column(nullable = false)
-    private Date createAt;
+    private Date datePost;
 
     @Column(nullable = false)
     private int status;
