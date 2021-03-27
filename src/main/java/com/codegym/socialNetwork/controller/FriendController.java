@@ -6,13 +6,12 @@ import com.codegym.socialNetwork.repository.FriendRepo;
 
 import com.codegym.socialNetwork.repository.FriendRequestRepo;
 import com.codegym.socialNetwork.repository.UserRepo;
-import com.codegym.socialNetwork.security.SpringUser;
+import com.codegym.socialNetwork.service.friend.FriendService;
 import com.codegym.socialNetwork.service.friend.IFriendService;
 import com.codegym.socialNetwork.service.user.IUserService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -39,6 +38,7 @@ public class FriendController {
 
     @Autowired
     private UserRepo userRepo;
+
     @GetMapping("list")
     public ModelAndView showAllFriends() {
         ModelAndView modelAndView = new ModelAndView("friend/list");
@@ -47,57 +47,26 @@ public class FriendController {
         return modelAndView;
     }
 
-//    @GetMapping("/friends")
-//    public ModelAndView FriendPage(@AuthenticationPrincipal SpringUser springUser, ModelMap modelMap) {
-//        List<Friend> friends = FriendRepo.findAllByToIdOrFromId(springUser.getUser().getId(), springUser.getUser().getId());
-//        List<AppUser> userFriends = new ArrayList<>();
-//        for (Friend friend : friends) {
-//            if (friend.getFrom().getId() == springUser.getUser().getId()) {
-//                userFriends.add(friend.getTo());
-//            } else if (friend.getTo().getId() == springUser.getUser().getId()) {
-//                userFriends.add(friend.getFrom());
-//            }
-//        }
-//        modelMap.addAttribute("user", springUser.getUser());
-////        modelMap.addAttribute("users", userRepo.findAllByIdIsNotLike(springUser.getUser().getId()));
-////        modelMap.addAttribute("requests", friendRequestRepo.findAllByToId(springUser.getUser().getId()));
-//        modelMap.addAttribute("friends", userFriends);
-//        return "userPage";
-//    }
-//
-//    @GetMapping("/add")
-//    public ModelAndView showInsertForm() {
-//        ModelAndView modelAndView = new ModelAndView("friend/add");
-//        modelAndView.addObject("friend", new Friend());
-//        return modelAndView;
-//    }
-//
-//    @PostMapping("/add")
-//    public ModelAndView AddFriend(@ModelAttribute("friend") Friend friend) {
-//        friendService.save(friend);
-//        ModelAndView modelAndView = new ModelAndView("friend/add");
-//        modelAndView.addObject("message", "Friend created successfully");
-//        return modelAndView;
-//    }
-//
-//    @GetMapping("/delete/{id}")
-//    public ModelAndView showDeleteForm(@PathVariable Long id) {
-//        Optional<Friend> friend = friendService.findById(id);
-//        if (friend.isPresent()) {
-//            ModelAndView modelAndView = new ModelAndView("friend/delete");
-//            modelAndView.addObject("friend", friend);
-//            return modelAndView;
-//        } else {
-//            ModelAndView modelAndView = new ModelAndView("/error");
-//            return modelAndView;
-//        }
-//    }
-//
-//    @PostMapping("/delete")
-//    public void deleteFriend(@ModelAttribute("friend") Friend friend) {
-//        friendService.remove(friend.getId());
-//    }
-//
+    @GetMapping("/delete/{id}")
+    public ModelAndView getRemoveFriend(@PathVariable(name = "id") long id) {
+        Optional<Friend> friendDelete = friendService.findById(id);
+        ModelAndView modelAndView;
+        if(friendDelete.isPresent()){
+            modelAndView = new ModelAndView("friend/delete");
+            modelAndView.addObject("friend", friendDelete.get());
+            return modelAndView;
+        }else{
+            modelAndView = new ModelAndView("404");
+            return modelAndView;
+        }
+
+    }
+    @PostMapping("/delete/{id}")
+    public ModelAndView RemoveFriend(@PathVariable(name = "id") long id) {
+        friendService.remove(id);
+        ModelAndView modelAndView = new ModelAndView("friend/list/delete");
+        return modelAndView;
+    }
 //    @GetMapping("/detail/{id}")
 //    public ModelAndView detailFriend(@PathVariable Long id) {
 //        Optional<Friend> friend = friendService.findById(id);
