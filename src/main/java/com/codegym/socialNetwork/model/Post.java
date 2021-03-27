@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String imagePost;
@@ -19,9 +19,6 @@ public class Post {
 
     @Column(nullable = false)
     private int status;
-
-    @Column(nullable = false)
-    private String Image;
 
     @ManyToOne
     private AppUser appUser;
