@@ -14,11 +14,13 @@ public class Post {
 
     private String imagePost;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Date datePost;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private int status;
+
+    private String context;
 
     @ManyToOne
     private AppUser appUser;
