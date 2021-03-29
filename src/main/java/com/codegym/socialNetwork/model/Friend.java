@@ -9,13 +9,13 @@ import java.util.Date;
 @Data
 public class Friend {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private Date dateRequest;
-    private Integer status;
+    private Date createAt;
+    @OneToOne
+    private StatusRequest statusRequest;
     @ManyToOne
-    private AppUser UserTo;
-
+    private AppUser from;
     @ManyToOne
-    private AppUser UserFrom;
+    private AppUser to;
 }
