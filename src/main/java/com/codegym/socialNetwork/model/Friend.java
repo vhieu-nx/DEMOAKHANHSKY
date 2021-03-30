@@ -18,4 +18,6 @@ public class Friend {
     private AppUser from;
     @ManyToOne
     private AppUser to;
+    @ManyToOne
+    private AppUser action_user;
 }

@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script type="text/javascript" th:src="@{/js/main.js}" ></script>
 </head>
 <body>
 <hr>
 <br>
-<!--<h3>ALL USERS</h3>-->
-<!--<table border="1">-->
-<!--    <tr>-->
-<!--        <td>Picture</td>-->
-<!--        <td>Name</td>-->
-<!--              <td>Send Friend Request</td>-->
-<!--    </tr>-->
-<!--    <tr th:each="user:${users}">-->
-<!--        <td><img th:src="@{/user/getImage(picUrl=${user.picUrl})}" width="50"></td>-->
+<h3>ALL USERS</h3>
+<table border="1">
+    <tr>
+        <td>Picture</td>
+        <td>Name</td>
+              <td>Send Friend Request</td>
+    </tr>
+<!--    <tr th:each="user:${user}">-->
+<!--        <td><img th:src="@{/user/getImage(picUrl=${user.imageUser})}" width="50"></td>-->
 <!--        <td th:text="${user.firstname}"></td>-->
 <!--        <td th:text="${user.lastname}"></td>-->
-<!--&lt;!&ndash;        <td><a th:href="@{/sendRequest(id=${user.id})}"> Send </a></td>&ndash;&gt;-->
+<!--        <td><a th:href="@{/sendRequest(id=${user.id})}"> Send </a></td>-->
 <!--    </tr>-->
-<!--</table>-->
+</table>
 <hr>
 <br>
 <h3>ALL REQUESTS</h3>
@@ -28,13 +30,13 @@
     <tr>
         <td>Picture</td>
         <td>Name</td>
-        <td>Surname</td>
+        <td>LastName</td>
         <td>Accept or Reject</td>
     </tr>
 <!--    <tr th:each="request:${requests}">-->
 <!--        <td><img th:src="@{/user/getImage(picUrl=${request.from.picUrl})}" width="80"></td>-->
-<!--        <td th:text="${request.from.name}"></td>-->
-<!--        <td th:text="${request.from.surname}"></td>-->
+<!--        <td th:text="${request.from.firstname}"></td>-->
+<!--        <td th:text="${request.from.lastname}"></td>-->
 <!--        <td>-->
 <!--            <a th:href="@{/acceptOrReject(id=${request.from.id},action='accept')}"> Accept </a>&nbsp;&nbsp;-->
 <!--            <a th:href="@{/acceptOrReject(id=${request.from.id},action='reject')}"> Reject </a>-->
@@ -53,16 +55,39 @@
         <td>Message</td>
     </tr>
     <tr th:each="friend:${friends}">
-        <td><img th:src="@{/user/getImage(picUrl=${friend.to.imageUser})}" width="80"></td>
-        <td th:text="${friend.to.firstName}"></td>
-        <td th:text="${friend.to.lastName}"></td>
+        <td><img th:src="@{/user/getImage(picUrl=${friend.imageUser})}" width="80"></td>
+        <td th:text="${friend.firstName}"></td>
+        <td th:text="${friend.lastName}"></td>
         <td>
-            <a th:href="@{/friends/delete/{id}(id=${friend.to.id})}">Delete</a>
+            <a th:action="@{/delete/{id}(id=${friend.id})}" class="btn btn-danger" id="deleteButton" th:method="delete" >Delete</a>
         </td>
         <td>
-            <a th:href="@{/messagePage(id=${friend.id})}"> Message </a>
+            <a th:href="@{/messagePage(id=${friend.id})}" class="btn btn-primary"> Message </a>
         </td>
     </tr>
+    <div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có muốn xoá người bạn này</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    <a href="" class="btn btn-primary" id="delRef">Có</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </table>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
