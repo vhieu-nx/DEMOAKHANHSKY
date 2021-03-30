@@ -3,7 +3,9 @@ package com.codegym.socialNetwork.service.user;
 import com.codegym.socialNetwork.model.AppUser;
 import com.codegym.socialNetwork.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -62,18 +64,26 @@ public class UserService implements IUserService {
 
     @Override
     public AppUser getCurrentUser() {
-        AppUser appUser;
-        String name;
-        Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (ob instanceof UserDetails ){
-            name = ((UserDetails)ob).getUsername();
-        }
-        else  {
-            name = ob.toString();
-        }
-        appUser = this.getUserByUsername(name);
-
-        return  appUser;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        AppUser user = userRepo.findByUsername(userName);
+        return user;
     }
+
+//    @Override
+//    public AppUser getCurrentUser() {
+//        AppUser appUser;
+//        String name;
+//        Object ob = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//        if (ob instanceof UserDetails ){
+//            name = ((UserDetails)ob).getUsername();
+//        }
+//        else  {
+//            name = ob.toString();
+//        }
+//        appUser = this.getUserByUsername(name);
+//
+//        return  appUser;
+//    }
 }
