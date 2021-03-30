@@ -55,7 +55,7 @@
         <td>Message</td>
     </tr>
     <tr th:each="friend:${friends}">
-        <td><img th:src="@{/user/getImage(picUrl=${friend.imageUser})}" width="80"></td>
+        <td><img th:src="@{/user/getImage(picUrl=${friend.avatar})}" width="80"></td>
         <td th:text="${friend.firstName}"></td>
         <td th:text="${friend.lastName}"></td>
         <td>
